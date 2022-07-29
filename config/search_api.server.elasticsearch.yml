@@ -1,0 +1,14 @@
+uuid: e9ae5c6f-deb1-4ca4-a9fb-f90e79f1f6d5
+langcode: en
+status: true
+dependencies:
+  module:
+    - elasticsearch_connector
+id: elasticsearch
+name: Elasticsearch
+description: ''
+backend: elasticsearch
+backend_config:
+  cluster_settings:
+    cluster: elasticsearch_cluster
+  fuzziness: auto

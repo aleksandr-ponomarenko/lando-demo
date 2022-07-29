@@ -1,0 +1,19 @@
+uuid: c38a97a5-d7f3-43fb-82ad-5bd98099bff2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_solr
+    - node.type.article
+id: node.article.field_title_solr
+field_name: field_title_solr
+entity_type: node
+bundle: article
+label: 'Title solr'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

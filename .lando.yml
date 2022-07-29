@@ -1,0 +1,107 @@
+name: drupal9
+recipe: drupal9
+config:
+  webroot: web
+  php: '8.1'
+  composer_version: '2'
+  drush: false
+  xdebug: false
+  database: mariadb
+services:
+  # appserver
+  appserver:
+    build_as_root:
+      - apt-get update && apt-get install -y mc net-tools iputils-ping
+    build:
+      - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+      - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+      - ln -sf /app/.lando/.bashrc /var/www/.bashrc
+  # varnish
+  varnish:
+    type: varnish:6
+    backends:
+      - appserver
+    backend_port: 80
+    portforward: true
+    overrides:
+      environment:
+        VARNISH_ALLOW_UNRESTRICTED_PURGE: 1
+    config:
+      vcl: .lando/varnish/default.vcl
+  # database
+  database:
+    type: compose
+    services:
+      image: mariadb
+      command: docker-entrypoint.sh mysqld
+      entrypoint: docker-entrypoint.sh
+      environment:
+        - MARIADB_ROOT_PASSWORD=root
+        - MARIADB_DATABASE=drupal
+        - MARIADB_USER=drupal
+        - MARIADB_PASSWORD=drupal
+      volumes:
+        - database_volume:/var/lib/mysql
+    volumes:
+      database_volume:
+  # phpmyadmin
+  phpmyadmin:
+    type: phpmyadmin
+    overrides:
+      environment:
+        - PMA_PASSWORD=root
+  # memcached
+  memcached:
+    type: memcached:custom
+    portforward: true
+    overrides:
+      image: memcached
+      command: ["-m", "4096"]
+      entrypoint: memcached
+  # solr
+  solr:
+    type: solr
+    core: collection1
+    portforward: true
+    config:
+      dir: .lando/solr
+  # elasticsearch
+  elasticsearch:
+    type: compose
+    portforward: true
+    app_mount: false
+    services:
+      image: elasticsearch:7.17.5
+      command: ["/bin/tini", "--", "/usr/local/bin/docker-entrypoint.sh", "eswrapper"]
+      environment:
+        - node.name=drupal-es01
+        - cluster.name=drupal-es01-docker-cluster
+        - cluster.initial_master_nodes=drupal-es01
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+        - http.cors.enabled=true
+        - http.cors.allow-origin=/.*/
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      volumes:
+        - es_volume:/usr/share/elasticsearch/data
+    volumes:
+      es_volume:
+proxy:
+  appserver:
+    - drupal9.lndo.site
+    - drupal9.lndo.site.192.168.56.46.nip.io
+  varnish:
+    - varnish.drupal9.lndo.site
+    - varnish.drupal9.lndo.site.192.168.56.46.nip.io
+  phpmyadmin:
+    - pma.drupal9.lndo.site
+    - pma.drupal9.lndo.site.192.168.56.46.nip.io
+  solr:
+    - solr.drupal9.lndo.site:8983
+    - solr.drupal9.lndo.site.192.168.56.46.nip.io:8983
+  elasticsearch:
+    - elasticsearch.drupal9.lndo.site:9200
+    - elasticsearch.drupal9.lndo.site.192.168.56.46.nip.io:9200

@@ -1,0 +1,19 @@
+uuid: 51271d76-afd3-452f-a09b-c74482c0375b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_elastic
+    - node.type.article
+id: node.article.field_title_elastic
+field_name: field_title_elastic
+entity_type: node
+bundle: article
+label: 'Title elastic'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

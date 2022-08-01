@@ -1,0 +1,173 @@
+# Ignore configuration files that may contain sensitive information.
+local.settings.php
+local.drush.yml
+local.site.yml
+local.services.yml
+tests/behat/local.yml
+tests/behat/report
+tests/behat/screenshots
+box/local.config.yml
+*.local
+local.blt.yml
+.lando.local.yml
+.history/
+
+# Skip ignore for local specific config overrides.
+!docroot/sites/settings/local.settings.php
+!web/sites/settings/local.settings.php
+
+# Ignore package-lock.json that is automatically created when adding
+# dependencies by users of NPMv5.
+docroot/themes/custom/*/package-lock.json
+web/themes/custom/*/package-lock.json
+
+# Ignore drupal core.
+docroot/core
+web/core
+
+# Ignore paths that contain user-generated content.
+docroot/sites/*/files
+web/sites/*/files
+/files-private
+docroot/sites/*/private
+web/sites/*/private
+
+# Ignore contrib modules. These should be created during build process.
+docroot/modules/contrib
+docroot/themes/contrib
+docroot/profiles/contrib
+docroot/libraries
+web/modules/contrib
+web/themes/contrib
+web/profiles/contrib
+web/libraries
+drush/Commands/acsf_tools
+
+# Ignore custom theme build artifacts
+docroot/themes/custom/*/node_modules
+docroot/themes/custom/*/css
+docroot/themes/custom/*/styleguide
+docroot/themes/custom/*/patterns/**/*.css
+docroot/themes/custom/*/components/**/*.css
+docroot/themes/custom/*/pattern-lab
+docroot/themes/custom/*/src/css
+docroot/themes/custom/*/dist/css
+web/themes/custom/*/node_modules
+web/themes/custom/*/css
+web/themes/custom/*/styleguide
+web/themes/custom/*/patterns/**/*.css
+web/themes/custom/*/components/**/*.css
+web/themes/custom/*/pattern-lab
+web/themes/custom/*/src/css
+web/themes/custom/*/dist/css
+
+# Ignore build artifacts
+deployment_identifier
+/deploy
+bin/*
+tmp
+reports
+/travis_wait*
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Eclipse
+*.pydevproject
+.project
+.metadata
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpathk
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# User-specific stuff:
+.idea/
+
+# User-specific stuff:
+.vscode/
+
+#XHProf
+xhprof_*
+
+#Composer vendor
+vendor/
+vendor/.git
+
+#Sass
+.sass-cache
+*.css.map
+
+#Netbeans IDE
+nbproject
+nbproject/*
+
+# DrupalVM
+.vagrant/
+
+# DevDesktop
+*.dd
+
+#Exports
+*.gz
+*.sql
+*.zip
+
+# PHPStorm
+atlassian-ide-plugin.xml
+
+#NPM
+npm-debug.log
+
+# Drush 9 Checksums
+drush/sites/.checksums
+
+# Deprecation detector rules
+.rules

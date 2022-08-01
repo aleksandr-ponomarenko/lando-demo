@@ -24,21 +24,51 @@
                 "type": "zip"
               }
             }
-          }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "d3/d3",
+                "version": "v3.5.17",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/d3/d3.git",
+                    "type": "git",
+                    "reference": "tags/v3.5.17"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "highlightjs/highlightjs",
+                "version": "11.2.0",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/highlightjs/highlight.js.git",
+                    "type": "git",
+                    "reference": "tags/11.2.0"
+                }
+            }
+        }
     ],
     "require": {
         "composer/installers": "^1.9",
+        "d3/d3": "^3.5",
         "drupal/admin_toolbar": "^3.1",
         "drupal/core-composer-scaffold": "^9.4",
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
+        "drupal/devel": "^4.1",
         "drupal/elasticsearch_search_api": "^1.0",
         "drupal/memcache": "^2.3",
         "drupal/performance_profiler": "^1.0@alpha",
         "drupal/purge": "^3.2",
         "drupal/search_api_solr": "^4.2",
         "drupal/varnish_purge": "^2.1",
-        "drush/drush": "^11.0"
+        "drupal/xhprof": "^1.0@beta",
+        "drush/drush": "^11.0",
+        "highlightjs/highlightjs": "^11.2"
     },
     "conflict": {
         "drupal/drupal": "*"

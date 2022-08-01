@@ -5,13 +5,20 @@ config:
   php: '8.1'
   composer_version: '2'
   drush: false
-  xdebug: false
+  xdebug: debug
   database: mariadb
 services:
   # appserver
   appserver:
+    overrides:
+      environment:
+        PHP_MEMORY_LIMIT: 128M
     build_as_root:
       - apt-get update && apt-get install -y mc net-tools iputils-ping
+      - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload
+      - cd /tmp && git clone https://github.com/longxinH/xhprof.git
+      - cd /tmp/xhprof/extension && phpize && ./configure && make && make install
+      - echo 'extension=xhprof.so' > /usr/local/etc/php/conf.d/xhprof.ini
     build:
       - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
       - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
@@ -89,19 +96,32 @@ services:
         - es_volume:/usr/share/elasticsearch/data
     volumes:
       es_volume:
+tooling:
+  blt:
+    service: appserver
+    cmd: /app/vendor/bin/blt
+  node:
+    service: appserver
+  npm:
+    service: appserver
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for apache.
+    cmd: "docker-php-ext-enable xdebug && /etc/init.d/apache2 reload"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for apache.
+    cmd: "rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload"
+    user: root
 proxy:
   appserver:
     - drupal9.lndo.site
-    - drupal9.lndo.site.192.168.56.46.nip.io
   varnish:
     - varnish.drupal9.lndo.site
-    - varnish.drupal9.lndo.site.192.168.56.46.nip.io
   phpmyadmin:
     - pma.drupal9.lndo.site
-    - pma.drupal9.lndo.site.192.168.56.46.nip.io
   solr:
     - solr.drupal9.lndo.site:8983
-    - solr.drupal9.lndo.site.192.168.56.46.nip.io:8983
   elasticsearch:
     - elasticsearch.drupal9.lndo.site:9200
-    - elasticsearch.drupal9.lndo.site.192.168.56.46.nip.io:9200

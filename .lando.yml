@@ -1,5 +1,7 @@
 name: drupal9
 recipe: drupal9
+excludes:
+  - .
 config:
   webroot: web
   php: '8.1'
@@ -10,12 +12,13 @@ config:
 services:
   # appserver
   appserver:
+    portforward: false
     overrides:
       environment:
         PHP_MEMORY_LIMIT: 128M
     build_as_root:
       - apt-get update && apt-get install -y mc net-tools iputils-ping
-      - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload
+      - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 start && /etc/init.d/apache2 reload
       - cd /tmp && git clone https://github.com/longxinH/xhprof.git
       - cd /tmp/xhprof/extension && phpize && ./configure && make && make install
       - echo 'extension=xhprof.so' > /usr/local/etc/php/conf.d/xhprof.ini
@@ -29,7 +32,6 @@ services:
     backends:
       - appserver
     backend_port: 80
-    portforward: true
     overrides:
       environment:
         VARNISH_ALLOW_UNRESTRICTED_PURGE: 1
@@ -60,7 +62,6 @@ services:
   # memcached
   memcached:
     type: memcached:custom
-    portforward: true
     overrides:
       image: memcached
       command: ["-m", "4096"]
@@ -69,7 +70,6 @@ services:
   solr:
     type: solr
     core: collection1
-    portforward: true
     config:
       dir: .lando/solr
   # elasticsearch
@@ -85,7 +85,7 @@ services:
         - cluster.name=drupal-es01-docker-cluster
         - cluster.initial_master_nodes=drupal-es01
         - bootstrap.memory_lock=true
-        - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+        - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
         - http.cors.enabled=true
         - http.cors.allow-origin=/.*/
       ulimits:

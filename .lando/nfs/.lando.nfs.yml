@@ -1,0 +1,7 @@
+services:
+  appserver:
+    overrides:
+      volumes:
+        - "${LANDO_VOLUME}:/app"
+compose:
+  - compose.yml

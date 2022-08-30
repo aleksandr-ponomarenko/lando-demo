@@ -15,10 +15,10 @@ The main goal here to have a build, to measure performance for different approac
 
 ## Reference results
 
-Step (command) | Mac M1 Mutagen | Mac M1 VirtioFS
---- | --- | ---
-**lando rebuild -y** | 1m07.100s | 1m02.160s
-**composer install** | 0m39.284s | 1m56.359s
-**Installation** | 0m20.600s | 0m30.914s
-**drush cr** | 0m0.941s | 0m2.192s
-**drush uli** | 0m0.438s | 0m1.431s
+Step (command) | Mac M1 Mutagen | Mac M1 VirtioFS | Mac mini 2012 Mutagen | Mac mini 2012 nfs | Mac mini 2012
+--- | --- | --- | --- | --- | ---
+**lando rebuild -y** | 1m07.100s | 1m02.160s | 3m02.170s | 2m37.86s | 2m46.52s
+**composer install** | 0m39.284s | 1m56.359s | 1m43.460s | 6m33.610s | 12m53.385s
+**Installation** | 0m20.600s | 0m30.914s | 1m46.744s | 2m7.015s | 3m45.007s
+**drush cr** | 0m0.941s | 0m2.192s | 0m4.409s | 0m9.864s | 0m10.456s
+**drush uli** | 0m0.438s | 0m1.431s | 0m1.782s | 0m6.773s | 0m9.003s

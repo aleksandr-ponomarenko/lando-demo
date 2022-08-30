@@ -56,6 +56,7 @@
         "composer/installers": "^1.9",
         "d3/d3": "^3.5",
         "drupal/admin_toolbar": "^3.1",
+        "drupal/coder": "^8.3",
         "drupal/core-composer-scaffold": "^9.4",
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
@@ -80,7 +81,9 @@
         "allow-plugins": {
             "composer/installers": true,
             "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true
+            "drupal/core-project-message": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "acquia/blt": true
         }
     },
     "extra": {
@@ -139,5 +142,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "acquia/blt": "^13.5"
     }
 }

@@ -1,6 +1,6 @@
 sync:
   defaults:
-    flushOnCreate: true
+    # flushOnCreate: true
     ignore:
       vcs: false
       paths:

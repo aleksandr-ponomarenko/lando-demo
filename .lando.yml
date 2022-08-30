@@ -12,13 +12,15 @@ config:
 services:
   # appserver
   appserver:
+    ssl: false
     portforward: false
+    scanner: false
     overrides:
       environment:
         PHP_MEMORY_LIMIT: 128M
     build_as_root:
-      - apt-get update && apt-get install -y mc net-tools iputils-ping
       - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 start && /etc/init.d/apache2 reload
+      - apt-get update && apt-get install -y mc net-tools iputils-ping
       - cd /tmp && git clone https://github.com/longxinH/xhprof.git
       - cd /tmp/xhprof/extension && phpize && ./configure && make && make install
       - echo 'extension=xhprof.so' > /usr/local/etc/php/conf.d/xhprof.ini
@@ -29,6 +31,10 @@ services:
   # varnish
   varnish:
     type: varnish:6
+    ssl: false
+    portforward: false
+    scanner: false
+    app_mount: false
     backends:
       - appserver
     backend_port: 80
@@ -40,6 +46,8 @@ services:
   # database
   database:
     type: compose
+    portforward: false
+    app_mount: false
     services:
       image: mariadb
       command: docker-entrypoint.sh mysqld
@@ -56,12 +64,18 @@ services:
   # phpmyadmin
   phpmyadmin:
     type: phpmyadmin
+    ssl: false
+    portforward: false
+    scanner: false
+    app_mount: false
     overrides:
       environment:
         - PMA_PASSWORD=root
   # memcached
   memcached:
     type: memcached:custom
+    portforward: false
+    app_mount: false
     overrides:
       image: memcached
       command: ["-m", "4096"]
@@ -69,13 +83,19 @@ services:
   # solr
   solr:
     type: solr
+    ssl: false
+    portforward: false
+    scanner: false
+    app_mount: false
     core: collection1
     config:
       dir: .lando/solr
   # elasticsearch
   elasticsearch:
     type: compose
-    portforward: true
+    ssl: false
+    portforward: false
+    scanner: false
     app_mount: false
     services:
       image: elasticsearch:7.17.5

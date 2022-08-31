@@ -27,13 +27,13 @@ Step (command) | Default | NFS | Mutagen | NVF - Default | NVF - NFS | NVF - NFS
 
 ## MacMini 2018 (i5-8500B 32GB)
 
-Step (command) | Default | NFS | Mutagen | NVF - NFS | NVF - VFS | NVF - Mutangen
---- | --- | --- | --- | --- | --- | ---
-**lando rebuild -y** | 1m09.760s | 0m51.733s | 1m02.520s | 0m54.946s | 0m52.401s | 0m55.570s
-**composer install** | 5m15.387s | 2m1.182s | 0m27.725s | 3m43.175s | 2m25.208s | 0m26.022s
-**Installation** | 1m50.490s | 0m51.826s | 0m32.897s | 1m21.647s | 1m20.198s | 0m30.093s
-**drush cr** | 0m6.203s | 0m3.996s | 0m1.406s | 0m5.918s | 0m4.872s | 0m1.313s
-**drush uli** | 0m3.520s | 0m3.206s | 0m0.716s | 0m5.239s | 0m3.104s | 0m0.740s
+Step (command) | Default | NFS | Mutagen | NVF - NFS | NVF - VFS | NVF - Mutangen+VFS | NVF - Mutagen
+--- | --- | --- | --- | --- | --- | --- | ---
+**lando rebuild -y** | 1m09.760s | 0m51.733s | 1m02.520s | 0m54.946s | 0m52.401s | 0m58.567s | 1m03.250s
+**composer install** | 5m15.387s | 2m1.182s | 0m27.725s | 3m43.175s | 2m25.208s | 0m30.047s | 1m4.242s
+**Installation** | 1m50.490s | 0m51.826s | 0m32.897s | 1m21.647s | 1m20.198s | 0m44.975s | 0m48.675s
+**drush cr** | 0m6.203s | 0m3.996s | 0m1.406s | 0m5.918s | 0m4.872s | 0m1.709s | 0m2.002s
+**drush uli** | 0m3.520s | 0m3.206s | 0m0.716s | 0m5.239s | 0m3.104s | 0m0.833s | 0m0.840s
 
 NVF = Big Sur virtualization.framework
 

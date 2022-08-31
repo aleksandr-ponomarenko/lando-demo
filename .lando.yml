@@ -49,7 +49,7 @@ services:
     portforward: false
     app_mount: false
     services:
-      image: mariadb
+      image: mariadb:10.7
       command: docker-entrypoint.sh mysqld
       entrypoint: docker-entrypoint.sh
       environment:

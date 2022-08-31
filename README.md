@@ -15,6 +15,16 @@ The main goal here to have a build, to measure performance for different approac
 
 # Reference results
 
+## Dell XPS 15 2018 (i7-8750H 64Gb)
+
+Step (command) | Default | Mariadb:10.7
+--- | --- | ---
+**lando rebuild -y** | 0m54.472s | 0m52.658s
+**composer install** | 0m39.976s | 0m33.206s
+**Installation** | 0m29.459s | 0m29.420s
+**drush cr** | 0m1.298s | 0m1.341s
+**drush uli** | 0m0.636s | 0m0.661s
+
 ## MacBook Pro 14 2021 M1 (M1PRO 16Gb)
 
 Step (command) | Default | NFS | Mutagen | NVF - Default | NVF - NFS | NVF - NFS+VFS | NVF - Mutagen+VFS | NVF - Mutagen

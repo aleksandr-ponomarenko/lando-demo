@@ -9,6 +9,8 @@ config:
   drush: false
   xdebug: debug
   database: mariadb
+env_file:
+  - .lando/lando.env
 services:
   # appserver
   appserver:

@@ -91,7 +91,7 @@ services:
     app_mount: false
     core: collection1
     config:
-      dir: .lando/solr
+      dir: .lando/solr/config
   # elasticsearch
   elasticsearch:
     type: compose

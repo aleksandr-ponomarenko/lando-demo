@@ -1,4 +1,4 @@
-name: drupal9
+name: lando-demo
 recipe: drupal9
 excludes:
   - .
@@ -138,12 +138,12 @@ tooling:
     user: root
 proxy:
   appserver:
-    - drupal9.lndo.site
+    - lando-demo.lndo.site
   varnish:
-    - varnish.drupal9.lndo.site
+    - varnish.lando-demo.lndo.site
   phpmyadmin:
-    - pma.drupal9.lndo.site
+    - pma.lando-demo.lndo.site
   solr:
-    - solr.drupal9.lndo.site:8983
+    - solr.lando-demo.lndo.site:8983
   elasticsearch:
-    - elasticsearch.drupal9.lndo.site:9200
+    - elasticsearch.lando-demo.lndo.site:9200

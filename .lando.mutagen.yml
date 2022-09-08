@@ -5,11 +5,11 @@ sync:
       vcs: false
       paths:
         - .DS_Store
-        - .history
-        - .idea
-        - .code
-        - .vscode
-        - vendor
+        - .history/
+        - .idea/
+        - .code/
+        - .vscode/
+#        - vendor
     permissions:
       defaultFileMode: 644
       defaultDirectoryMode: 755

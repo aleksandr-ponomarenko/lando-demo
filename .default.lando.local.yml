@@ -1,0 +1,16 @@
+services:
+  # appserver
+  appserver:
+    overrides:
+      volumes:
+        - ~/.ssh/config:/var/www/.ssh/config:ro
+#         # For NFS
+#         - "${LANDO_VOLUME}:/app"
+  # phpmyadmin
+  phpmyadmin:
+    type: phpmyadmin
+    overrides:
+      image: arm64v8/phpmyadmin
+#  # For NFS
+# compose:
+#   - compose.yml

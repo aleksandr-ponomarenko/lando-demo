@@ -20,14 +20,15 @@ The main goal here to have a build, to measure performance for different approac
 1. Dell XPS 15 2018 (i7-8750H 64Gb)
 2. HP ZBook Create G7 2020 (i7-10750H 32Gb)
 3. Dell Latitude 5530 2022 (i5-1235U 24Gb)
+4. Amazon EC2 c5.xlarge (Xeon Platinum 8275CL 2 cores 8Gb)
 
-Step (command) | 1.VBox Default | 1.VBox Mariadb:10.7 | 1. WSL Default | 2.VBox Default | 3.Ubuntu
---- | --- | --- | --- | --- | ---
-**lando rebuild -y** | 0m54.472s | 0m52.658s | 1m1.019s | 0m47.213s | 1m7,173s
-**composer install** | 0m39.976s | 0m33.206s | 0m34.451s | <font color="green">**0m25.438s**</font> | <font color="red">*1m15.002s*</font>
-**Installation** | 0m29.459s | 0m29.420s | <font color="red">*0m51.364s*</font> | <font color="green">**0m22.902s**</font> | 0m49.798s
-**drush cr** | 0m1.298s | 0m1.341s | <font color="red">*0m2.339s*</font> | <font color="green">**0m1.031s**</font> | 0m2.170s
-**drush uli** | 0m0.636s | 0m0.661s | <font color="red">*0m0.933s*</font> | <font color="green">**0m0.589s**</font> | 0m0.797s
+Step (command) | 1.VBox Default | 1.VBox Mariadb:10.7 | 1. WSL Default | 2.VBox Default | 3.Ubuntu | 4.Ubuntu
+--- | --- | --- | --- | --- | --- | ---
+**lando rebuild -y** | 0m54.472s | 0m52.658s | 1m1.019s | 0m47.213s | 1m7,173s | 0m49.214s
+**composer install** | 0m39.976s | 0m33.206s | 0m34.451s | 0m25.438s | <font color="red">*1m15.002s*</font> | <font color="green">**0m19.287s**</font>
+**Installation** | 0m29.459s | 0m29.420s | <font color="red">*0m51.364s*</font> | <font color="green">**0m22.902s**</font> | 0m49.798s | 0m30.790s
+**drush cr** | 0m1.298s | 0m1.341s | <font color="red">*0m2.339s*</font> | <font color="green">**0m1.031s**</font> | 0m2.170s | 0m1.412s
+**drush uli** | 0m0.636s | 0m0.661s | <font color="red">*0m0.933s*</font> | <font color="green">**0m0.589s**</font> | 0m0.797s | 0m0.715s
 
 ## MacBook Pro 14 2021 M1 (M1PRO 16Gb)
 

@@ -4,14 +4,32 @@ The main goal here to have a build, to measure performance for different approac
 
 ## Test pattern:
 ### Preparations:
-- `lando stop; lando destroy` - just in case
-- `rm -rf vendor/ web/core web/libraries web/modules/contrib/` - remove composer installed stuff
+Just in case:
+```
+lando stop; lando destroy
+```
+Remove composer installed stuff:
+```
+rm -rf vendor/ web/core web/libraries web/modules/contrib/
+```
 ### Rebuild:
-- `time lando rebuild -y` - save the result of time output
+Save the result of time output:
+```
+time lando rebuild -y
+```
 ### Installation:
-- `lando ssh` - go inside container
-- `export COMPOSER_PROCESS_TIMEOUT=900; time composer install` - composer install should be standalone
-- `time (drush sql-create -y; drush si -y; drush edel -y shortcut_set; drush cset -y system.site uuid "9a85d39d-70af-4dd8-93d3-9d794cc3bfa9"; drush cim -y); time drush cr; time drush --uri=lando-demo.lndo.site uli` - execute the whole installation process and save the 'time' output. And that's okay to have purgers error there
+Go inside container:
+```
+lando ssh
+```
+Composer install should be standalone:
+```
+export COMPOSER_PROCESS_TIMEOUT=900; time composer install
+```
+Execute the whole installation process and save the 'time' output. And that's okay to have purgers error there:
+```
+time (drush sql-create -y; drush si -y; drush edel -y shortcut_set; drush cset -y system.site uuid "9a85d39d-70af-4dd8-93d3-9d794cc3bfa9"; drush cim -y); time drush cr; time drush --uri=lando-demo.lndo.site uli
+```
 
 # Reference results
 

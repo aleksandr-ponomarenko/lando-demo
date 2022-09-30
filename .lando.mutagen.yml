@@ -9,7 +9,7 @@ sync:
         - .idea/
         - .code/
         - .vscode/
-#        - vendor
+        - react-js-sample/node_modules/
     permissions:
       defaultFileMode: 644
       defaultDirectoryMode: 755

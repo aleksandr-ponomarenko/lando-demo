@@ -33,7 +33,7 @@ time (drush sql-create -y; drush si -y; drush edel -y shortcut_set; drush cset -
 # Frontend test build
 - Clone and install:
 ```
-git clone https://github.com/edoko/react-js-sample.git; cd react-js-sample/; npm i;
+rm -rf react-js-sample/; git clone https://github.com/edoko/react-js-sample.git; cd react-js-sample/; time npm i; time npm run build;
 ```
 - Run test (should be **30-40 sec**):
 ```
@@ -56,13 +56,13 @@ Step (command) | 1.VBox Default | 1.VBox Mariadb:10.7 | 1. WSL Default | 2.VBox 
 
 ## MacBook Pro 14 2021 M1 (M1PRO 16Gb)
 
-Step (command) | Default | NFS | Mutagen | NVF - Default | NVF - NFS | NVF - NFS+VFS | NVF - Mutagen+VFS | NVF - Mutagen
---- | --- | --- | --- | --- | --- | --- | --- | ---
-**lando rebuild -y** | 0m51.765s | 0m53.667s | 1m00.070s | 0m49.028s | 0m45.311s | 0m45.893s | 0m49.446s | 0m56.399s
-**composer install** | <font color="red">*6m12.243s*</font> | 3m37.019s | 0m28.856s | 4m18.588s | 2m21.539s | 2m33.923s | 0m29.812s | <font color="green">**0m25.302s**</font>
-**Installation** | <font color="red">*2m3.686s*</font> | 0m52.443s | 0m17.674s | 1m15.384s | 0m43.886s | 0m36.884s | <font color="green">**0m15.371s**</font> | 0m17.122s
-**drush cr** | <font color="red">*0m6.168s*</font> | 0m5.549s | 0m0.827s | 0m3.313s | 0m4.965s | 0m3.540s | 0m0.736s | <font color="green">**0m0.691s**</font>
-**drush uli** | 0m4.037s | <font color="red">*0m4.318s*</font> | 0m0.458s | 0m2.317s | 0m3.637s | 0m2.438s | <font color="green">**0m0.382s**</font> | 0m0.383s
+Step (command) | Default | NFS | Mutagen | NVF - Default | NVF - NFS | NVF - NFS+VFS | NVF - Mutagen+VFS | NVF - Mutagen | DD Mutagen plugin
+--- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+**lando rebuild -y** | 0m51.765s | 0m53.667s | 1m00.070s | 0m49.028s | 0m45.311s | 0m45.893s | 0m49.446s | 0m56.399s | 1m21.600s
+**composer install** | <font color="red">*6m12.243s*</font> | 3m37.019s | 0m28.856s | 4m18.588s | 2m21.539s | 2m33.923s | 0m29.812s | <font color="green">**0m25.302s**</font> | 2m47.488s
+**Installation** | <font color="red">*2m3.686s*</font> | 0m52.443s | 0m17.674s | 1m15.384s | 0m43.886s | 0m36.884s | <font color="green">**0m15.371s**</font> | 0m17.122s | 0m42.031s
+**drush cr** | <font color="red">*0m6.168s*</font> | 0m5.549s | 0m0.827s | 0m3.313s | 0m4.965s | 0m3.540s | 0m0.736s | <font color="green">**0m0.691s**</font> | 0m4.159s
+**drush uli** | 0m4.037s | <font color="red">*0m4.318s*</font> | 0m0.458s | 0m2.317s | 0m3.637s | 0m2.438s | <font color="green">**0m0.382s**</font> | 0m0.383s | 0m3.539s
 
 NVF = Big Sur virtualization.framework
 

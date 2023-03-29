@@ -1,2 +1,6 @@
 project:
-  machine_name: app
+  machine_name: lando-demo
+  human_name: "Lando demo"
+local:
+    protocol: http
+    hostname: lando-demo.lndo.site

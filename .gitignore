@@ -11,6 +11,7 @@ box/local.config.yml
 local.blt.yml
 .lando.local.yml
 .history/
+.fleet/
 
 # Skip ignore for local specific config overrides.
 !docroot/sites/settings/local.settings.php

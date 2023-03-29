@@ -1,6 +1,6 @@
 {
     "name": "drupal/recommended-project",
-    "description": "Project template for Drupal 9 projects with a relocated document root",
+    "description": "Project template for Drupal 10 projects with a relocated document root",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -53,23 +53,26 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.9",
+        "composer/installers": "^2.2",
+        "cweagans/composer-patches": "^1.7",
         "d3/d3": "^3.5",
-        "drupal/admin_toolbar": "^3.1",
+        "drupal/admin_toolbar": "^3.3",
         "drupal/coder": "^8.3",
-        "drupal/core-composer-scaffold": "^9.4",
-        "drupal/core-project-message": "^9.4",
-        "drupal/core-recommended": "^9.4",
-        "drupal/devel": "^4.1",
-        "drupal/elasticsearch_search_api": "^1.0",
+        "drupal/core-composer-scaffold": "^10.0",
+        "drupal/core-project-message": "^10.0",
+        "drupal/core-recommended": "^10.0",
+        "drupal/devel": "^5.1",
+        "drupal/elasticsearch_search_api": "^2.0",
         "drupal/memcache": "^2.3",
-        "drupal/performance_profiler": "^1.0@alpha",
+        "drupal/performance_profiler": "^1.0@dev",
         "drupal/purge": "^3.2",
         "drupal/search_api_solr": "^4.2",
+        "drupal/upgrade_status": "^4.0@alpha",
         "drupal/varnish_purge": "^2.1",
         "drupal/xhprof": "^1.0@beta",
-        "drush/drush": "^11.0",
-        "highlightjs/highlightjs": "^11.2"
+        "drush/drush": "^11.5",
+        "highlightjs/highlightjs": "^11.2",
+        "mglaman/composer-drupal-lenient": "^1.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -83,7 +86,8 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "acquia/blt": true
+            "mglaman/composer-drupal-lenient": true,
+            "cweagans/composer-patches": true
         }
     },
     "extra": {
@@ -141,9 +145,15 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "drupal-lenient": {
+            "allowed-list": ["drupal/varnish_purge"]
+        },
+        "enable-patching": true,
+        "patches": {
+            "drupal/varnish_purge": {
+                "[#3299406]: Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2023-03-15/varnish_purge-automated-drupal-10-compatibility-fixes-3299406-10.patch"
+            }
         }
-    },
-    "require-dev": {
-        "acquia/blt": "^13.5"
     }
 }

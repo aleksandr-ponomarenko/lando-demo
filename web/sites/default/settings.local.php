@@ -23,10 +23,11 @@ $settings['config_sync_directory'] = '../config';
 $settings['extension_discovery_scan_tests'] = FALSE;
 $settings['skip_permissions_hardening'] = TRUE;
 
-$settings['memcache']['servers'] = ['memcached:11211' => 'default'];
-$settings['memcache']['bins'] = ['default' => 'default'];
-$settings['memcache']['key_prefix'] = '';
-$cache_backend = class_exists('Memcache', FALSE) ? 'cache.backend.memcache' : 'cache.backend.database';
+$cache_backend = 'cache.backend.database';
+if (file_exists($app_root . '/' . $site_path . '/settings.memcache.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.memcache.local.php';
+}
+
 // $cache_backend = 'cache.backend.null';
 $settings['cache']['default'] = $cache_backend;
 

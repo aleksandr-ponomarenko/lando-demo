@@ -1,5 +1,5 @@
 name: lando-demo
-recipe: drupal9
+recipe: drupal10
 excludes:
   - .
 config:
@@ -21,8 +21,8 @@ services:
       environment:
         PHP_MEMORY_LIMIT: 128M
     build_as_root:
-      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
-      - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 start && /etc/init.d/apache2 reload
+      - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - apt-get install -y ca-certificates curl gnupg; mkdir -p /etc/apt/keyrings; curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; NODE_MAJOR=18; echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
       - apt-get update && apt-get install -y mc net-tools iputils-ping python nodejs
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
@@ -52,7 +52,9 @@ services:
   # database
   database:
     type: compose
+    ssl: false
     portforward: false
+    scanner: false
     app_mount: false
     services:
       image: mariadb:10.6
@@ -80,11 +82,13 @@ services:
   # memcached
   memcached:
     type: memcached:custom
+    ssl: false
     portforward: false
+    scanner: false
     app_mount: false
     overrides:
       image: memcached
-      command: ["-m", "4096"]
+      command: ["-m", "512"]
       entrypoint: memcached
   # solr
   solr:

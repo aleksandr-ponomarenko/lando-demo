@@ -28,7 +28,7 @@ export COMPOSER_PROCESS_TIMEOUT=900; time composer install
 ```
 - Execute the whole installation process and save the 'time' output. And that's okay to have purgers error there:
 ```
-time (drush sql-create -y; drush si -y; drush edel -y shortcut_set; drush cset -y system.site uuid "9a85d39d-70af-4dd8-93d3-9d794cc3bfa9"; drush cim -y); time drush cr; time drush --uri=lando-demo.lndo.site uli
+mv /app/web/sites/default/settings.memcache.local.php /app/web/sites/default/settings.memcache.local.php.bak; time ( drush sql-create -y; drush si -y; drush edel -y shortcut_set; drush cset -y system.site uuid "9a85d39d-70af-4dd8-93d3-9d794cc3bfa9"; drush cim -y); mv /app/web/sites/default/settings.memcache.local.php.bak /app/web/sites/default/settings.memcache.local.php; time drush cr; time drush --uri=lando-demo.lndo.site uli
 ```
 # Frontend test build
 - Clone and install:
@@ -45,14 +45,15 @@ time (for i in {1..5}; do npm run build; done)
 2. HP ZBook Create G7 2020 (i7-10750H 32Gb)
 3. Dell Latitude 5530 2022 (i5-1235U 24Gb)
 4. Amazon EC2 c5.xlarge (Xeon Platinum 8275CL 2 cores 8Gb)
+5. HP ProBook 440 G10 (i5-1335U 64Gb)
 
-Step (command) | 1.VBox Default | 1.VBox Mariadb:10.7 | 1. WSL Default | 2.VBox Default | 3.Ubuntu | 4.Ubuntu
---- | --- | --- | --- | --- | --- | ---
-**lando rebuild -y** | 0m54.472s | 0m52.658s | 1m1.019s | 0m47.213s | 1m7,173s | 0m49.214s
-**composer install** | 0m39.976s | 0m33.206s | 0m34.451s | 0m25.438s | <font color="red">*1m15.002s*</font> | <font color="green">**0m19.287s**</font>
-**Installation** | 0m29.459s | 0m29.420s | <font color="red">*0m51.364s*</font> | <font color="green">**0m22.902s**</font> | 0m49.798s | 0m30.790s
-**drush cr** | 0m1.298s | 0m1.341s | <font color="red">*0m2.339s*</font> | <font color="green">**0m1.031s**</font> | 0m2.170s | 0m1.412s
-**drush uli** | 0m0.636s | 0m0.661s | <font color="red">*0m0.933s*</font> | <font color="green">**0m0.589s**</font> | 0m0.797s | 0m0.715s
+Step (command) | 1.VBox Default | 1.VBox Mariadb:10.7 | 1. WSL Default | 2.VBox Default | 3.Ubuntu | 4.Ubuntu | 5.WSL
+--- | --- | --- | --- | --- | --- | --- | ---
+**lando rebuild -y** | 0m54.472s | 0m52.658s | 1m1.019s | 0m47.213s | 1m7,173s | 0m49.214s | 0m51.050s
+**composer install** | 0m39.976s | 0m33.206s | 0m34.451s | 0m25.438s | <font color="red">*1m15.002s*</font> | <font color="green">**0m19.287s**</font> | 0m37.737s
+**Installation** | 0m29.459s | 0m29.420s | <font color="red">*0m51.364s*</font> | <font color="green">**0m22.902s**</font> | 0m49.798s | 0m30.790s | 1m6.630s
+**drush cr** | 0m1.298s | 0m1.341s | <font color="red">*0m2.339s*</font> | <font color="green">**0m1.031s**</font> | 0m2.170s | 0m1.412s | 0m1.027s
+**drush uli** | 0m0.636s | 0m0.661s | <font color="red">*0m0.933s*</font> | <font color="green">**0m0.589s**</font> | 0m0.797s | 0m0.715s | 0m0.598s
 
 ## MacBook Pro 14 2021 M1 (M1PRO 16Gb)
 

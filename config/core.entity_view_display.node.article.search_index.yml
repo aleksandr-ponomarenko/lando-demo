@@ -4,15 +4,25 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.search_index
+    - field.field.node.article.body
+    - field.field.node.article.comment
+    - field.field.node.article.field_image
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_title_elastic
+    - field.field.node.article.field_title_solr
     - node.type.article
+  module:
+    - user
 id: node.article.search_index
 targetEntityType: node
 bundle: article
 mode: search_index
 content: {  }
 hidden:
+  body: true
   comment: true
   field_image: true
+  field_tags: true
   field_title_elastic: true
   field_title_solr: true
   langcode: true

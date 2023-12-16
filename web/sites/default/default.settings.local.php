@@ -33,10 +33,12 @@ $settings['memcache']['bins'] = ['default' => 'default'];
 $settings['memcache']['key_prefix'] = '';
 
 $cache_backend = 'cache.backend.database';
-// $cache_backend = 'cache.backend.memcache';
+if (file_exists($app_root . '/' . $site_path . '/settings.memcache.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.memcache.local.php';
+}
+
 // $cache_backend = 'cache.backend.null';
 $settings['cache']['default'] = $cache_backend;
-//$settings['cache']['bins']['discovery'] = 'cache.backend.database';
 
 // $settings['cache']['bins']['render'] = 'cache.backend.null';
 // $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';

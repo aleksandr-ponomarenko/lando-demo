@@ -151,9 +151,6 @@
         },
         "enable-patching": true,
         "patches": {
-            "drupal/varnish_purge": {
-                "[#3299406]: Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2023-03-15/varnish_purge-automated-drupal-10-compatibility-fixes-3299406-10.patch"
-            }
         }
     }
 }

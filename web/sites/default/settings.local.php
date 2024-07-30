@@ -16,6 +16,13 @@ $databases['default']['default'] = [
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 ];
 
+// Set trusted hosts pattern.
+$settings['trusted_host_patterns'] = [
+  ''
+];
+
+$settings['state_cache'] = TRUE;
+
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
 
 $settings['config_sync_directory'] = '../config';

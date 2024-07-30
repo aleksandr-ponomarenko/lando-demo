@@ -4,7 +4,7 @@ excludes:
   - .
 config:
   webroot: web
-  php: '8.1'
+  php: '8.3'
   composer_version: '2'
   drush: false
   xdebug: debug
@@ -22,18 +22,17 @@ services:
         PHP_MEMORY_LIMIT: 128M
     build_as_root:
       - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-      - apt-get install -y ca-certificates curl gnupg; mkdir -p /etc/apt/keyrings; curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; NODE_MAJOR=18; echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-      - apt-get update && apt-get install -y mc net-tools iputils-ping python nodejs
+      - apt-get install -y ca-certificates curl gnupg; mkdir -p /etc/apt/keyrings; curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; NODE_MAJOR=20; echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-      - apt update && apt install --no-install-recommends -y yarn
-      - cd /tmp && git clone https://github.com/longxinH/xhprof.git
-      - cd /tmp/xhprof/extension && phpize && ./configure && make && make install
-      - echo 'extension=xhprof.so' > /usr/local/etc/php/conf.d/xhprof.ini
+      - apt-get update && apt-get install --no-install-recommends -y yarn mc net-tools iputils-ping python nodejs
+      # - cd /tmp && git clone https://github.com/longxinH/xhprof.git
+      # - cd /tmp/xhprof/extension && phpize && ./configure && make && make install
+      # - echo 'extension=xhprof.so' > /usr/local/etc/php/conf.d/xhprof.ini
     build:
-      - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-      - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
-      - ln -sf /app/.lando/.bashrc /var/www/.bashrc
+      - ln -sf /app/.lando/git-completion.bash  /var/www/.git-completion.bash
+      - ln -sf /app/.lando/git-prompt.sh /var/www/.git-prompt.sh
+      - ln -sf /app/.lando/bashrc /var/www/.bashrc
   # varnish
   varnish:
     type: varnish:6
@@ -69,6 +68,9 @@ services:
         - database_volume:/var/lib/mysql
     volumes:
       database_volume:
+    run_as_root:
+      # Create extra databases.
+      - mysql -uroot -proot -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
   # phpmyadmin
   phpmyadmin:
     type: phpmyadmin

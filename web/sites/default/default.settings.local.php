@@ -19,7 +19,10 @@ $databases['default']['default'] = [
 
 // Set trusted hosts pattern.
 $settings['trusted_host_patterns'] = [
+  ''
 ];
+
+$settings['state_cache'] = TRUE;
 
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
 

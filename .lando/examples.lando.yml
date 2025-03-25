@@ -1,0 +1,52 @@
+services:
+
+  # database native
+  database:
+    type: mariadb
+    version: "10.6"
+    ssl: false
+    portforward: false
+    scanner: false
+    app_mount: false
+    healthcheck: false
+    creds:
+      user: drupal
+      password: drupal
+      database: drupal
+      volumes:
+        - database_volume:/var/lib/mysql
+    volumes:
+      database_volume:
+    # run_as_root:
+    #   # Create extra databases.
+    #   - mysql -uroot -proot -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
+
+  # elasticsearch compose
+  elasticsearch:
+    type: compose
+    ssl: false
+    portforward: false
+    scanner: false
+    app_mount: false
+    services:
+      image: elasticsearch:7.17.5
+      command: ["/bin/tini", "--", "/usr/local/bin/docker-entrypoint.sh", "eswrapper"]
+      environment:
+        - node.name=drupal-es01
+        - cluster.name=drupal-es01-docker-cluster
+        - cluster.initial_master_nodes=drupal-es01
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
+        - http.cors.enabled=true
+        - http.cors.allow-origin=/.*/
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      volumes:
+        - es_volume:/usr/share/elasticsearch/data
+    volumes:
+      es_volume:
+
+include:
+  - .lando/examples.lando.yml

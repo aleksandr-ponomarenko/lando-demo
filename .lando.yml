@@ -8,7 +8,7 @@ config:
   composer_version: '2'
   drush: false
   xdebug: false
-  database: mariadb
+  database: mariadb:10.6
 env_file:
   - .lando/lando.env
 services:
@@ -48,7 +48,7 @@ services:
 
   # database overriden
   database:
-    type: mariadb
+    type: mariadb:10.6
     ssl: false
     portforward: false
     scanner: false
@@ -59,7 +59,7 @@ services:
       password: drupal
       database: drupal
     overrides:
-      image: mariadb:10.6
+      image: mariadb:10.6.23
       command: docker-entrypoint.sh mysqld
       entrypoint: docker-entrypoint.sh
       environment:
@@ -78,7 +78,7 @@ services:
     scanner: false
     app_mount: false
     overrides:
-      image: phpmyadmin:latest
+      image: phpmyadmin:5.2.2
       environment:
         - PMA_PASSWORD=root
 
@@ -90,7 +90,7 @@ services:
     scanner: false
     app_mount: false
     overrides:
-      image: memcached:latest
+      image: memcached:1.6.39
       command: ["-m", "64"]
       entrypoint: memcached
 
@@ -105,6 +105,14 @@ services:
     core: collection1
     config:
       dir: .lando/solr/config
+    overrides:
+      environment:
+        SOLR_HEAP: "384m"
+      deploy:
+        resources:
+          limits:
+            memory: 512m
+      mem_limit: 512m
     services:
       volumes:
         - solr_volume:/usr/share/elasticsearch/data

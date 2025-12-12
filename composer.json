@@ -62,7 +62,7 @@
         "drupal/core-composer-scaffold": "^10.3",
         "drupal/core-project-message": "^10.3",
         "drupal/core-recommended": "^10.3",
-        "drupal/devel": "^5.1",
+        "drupal/devel": "^5.5.0",
         "drupal/elasticsearch_search_api": "^2.0",
         "drupal/memcache": "^2.3",
         "drupal/performance_profiler": "^1.0@dev",
@@ -71,7 +71,7 @@
         "drupal/upgrade_status": "^4.0@alpha",
         "drupal/varnish_purge": "^2.1",
         "drupal/xhprof": "^1.0@beta",
-        "drush/drush": "^12.0",
+        "drush/drush": "^13",
         "highlightjs/highlightjs": "^11.2",
         "mglaman/composer-drupal-lenient": "^1.0"
     },

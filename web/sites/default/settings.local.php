@@ -31,7 +31,9 @@ $settings['extension_discovery_scan_tests'] = FALSE;
 $settings['skip_permissions_hardening'] = TRUE;
 
 $cache_backend = 'cache.backend.database';
-if (file_exists($app_root . '/' . $site_path . '/settings.memcache.local.php')) {
+if (extension_loaded('memcached')
+  && file_exists($app_root . '/' . $site_path . '/settings.memcache.local.php')
+) {
   include $app_root . '/' . $site_path . '/settings.memcache.local.php';
 }
 

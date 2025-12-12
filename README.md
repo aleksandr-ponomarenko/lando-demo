@@ -94,3 +94,14 @@ Step (command) | Default | NFS | Mutagen
 **drush uli** | 0m9.003s | 0m6.773s | 0m1.782s
 
 NVF - Big Sur virtualization.framework not available for this hardware
+
+# Useful commands
+
+## Solr
+```
+http://solr.lando-demo.lndo.site/solr/collection1/select?q=*:*&rows=10
+```
+## Elasticsearch
+```
+http://elasticsearch.lando-demo.lndo.site/elasticsearch_index_drupal_content_elastic/_search?q=*:*&size=10&pretty
+```

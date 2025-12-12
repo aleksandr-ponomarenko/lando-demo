@@ -8,67 +8,55 @@ config:
   composer_version: '2'
   drush: false
   xdebug: false
-  database: mariadb:10.6
 env_file:
   - .lando/lando.env
-services:
 
-  # appserver
+services:
+  # appserver [image: devwithlando/php:8.3-apache-5]
   appserver:
     ssl: false
     portforward: false
     scanner: false
     overrides:
+      image: ''  # Clear the default image
+      build:
+        context: ./.lando/appserver
+        dockerfile: Dockerfile
       environment:
         PHP_MEMORY_LIMIT: 128M
-    build_as_root:
-      - curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh && bash nodesource_setup.sh
-      - apt-get update && apt-get install --no-install-recommends -y mc net-tools iputils-ping python3 nodejs
-      - npm install -g npm && npm install -g yarn
-    build:
-      - ln -sf /app/.lando/git-completion.bash  /var/www/.git-completion.bash
-      - ln -sf /app/.lando/git-prompt.sh /var/www/.git-prompt.sh
-      - ln -sf /app/.lando/bashrc /var/www/.bashrc
 
-  # varnish
+  # varnish [image: varnish:7.5]
   varnish:
-    type: varnish:6
-    ssl: false
+    type: compose
     portforward: false
     scanner: false
     app_mount: false
-    backends:
-      - appserver
-    backend_port: 80
-    overrides:
-      environment:
-        VARNISH_ALLOW_UNRESTRICTED_PURGE: 1
-    config:
-      vcl: .lando/varnish/default.vcl
+    services:
+      build:
+        context: ./.lando/varnish
+      command: ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_req_hdr_len=16384", "-p", "http_resp_hdr_len=16384", "-s", "default,64M"]
 
   # database overriden
   database:
-    type: mariadb:10.6
+    type: compose
     ssl: false
     portforward: false
     scanner: false
     app_mount: false
     healthcheck: false
-    creds:
-      user: drupal
-      password: drupal
-      database: drupal
-    overrides:
+    services:
       image: mariadb:10.6.23
       command: docker-entrypoint.sh mysqld
       entrypoint: docker-entrypoint.sh
       environment:
-        - MYSQL_ROOT_PASSWORD=root
-    services:
+        - MARIADB_ROOT_PASSWORD=root
+        - MARIADB_DATABASE=drupal
+        - MARIADB_USER=drupal
+        - MARIADB_PASSWORD=drupal
       volumes:
-        - database_volume:/var/lib/mysql
+        - data_database:/var/lib/mysql
     volumes:
-      database_volume:
+      data_database:
 
   # phpmyadmin
   phpmyadmin:
@@ -94,7 +82,7 @@ services:
       command: ["-m", "64"]
       entrypoint: memcached
 
-  # solr
+  # # solr
   solr:
     type: solr:8
     ssl: false
@@ -113,15 +101,10 @@ services:
           limits:
             memory: 512m
       mem_limit: 512m
-    services:
-      volumes:
-        - solr_volume:/usr/share/elasticsearch/data
-    volumes:
-      solr_volume:
 
-  # elasticsearch
+  # # elasticsearch
   elasticsearch:
-    type: elasticsearch:7
+    type: elasticsearch:8
     ssl: false
     portforward: false
     scanner: false
@@ -136,11 +119,6 @@ services:
         - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
         - http.cors.enabled=true
         - http.cors.allow-origin=/.*/
-    services:
-      volumes:
-        - es_volume:/usr/share/elasticsearch/data
-    volumes:
-      es_volume:
 
 tooling:
   node:

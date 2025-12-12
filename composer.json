@@ -58,19 +58,18 @@
         "d3/d3": "^3.5",
         "drupal/admin_toolbar": "^3.3",
         "drupal/coder": "^8.3",
-        "drupal/core": "^10.3",
-        "drupal/core-composer-scaffold": "^10.3",
-        "drupal/core-project-message": "^10.3",
-        "drupal/core-recommended": "^10.3",
+        "drupal/core": "~11.1.9",
+        "drupal/core-composer-scaffold": "~11.1.9",
+        "drupal/core-project-message": "~11.1.9",
+        "drupal/core-recommended": "~11.1.9",
         "drupal/devel": "^5.5.0",
-        "drupal/elasticsearch_search_api": "^2.0",
+        "drupal/elasticsearch_connector": "^8.0@alpha",
         "drupal/memcache": "^2.3",
         "drupal/performance_profiler": "^1.0@dev",
         "drupal/purge": "^3.2",
         "drupal/search_api_solr": "^4.2",
         "drupal/upgrade_status": "^4.0@alpha",
         "drupal/varnish_purge": "^2.1",
-        "drupal/xhprof": "^1.0@beta",
         "drush/drush": "^13",
         "highlightjs/highlightjs": "^11.2",
         "mglaman/composer-drupal-lenient": "^1.0"
@@ -84,11 +83,12 @@
         "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "mglaman/composer-drupal-lenient": true,
-            "cweagans/composer-patches": true
+            "php-http/discovery": true
         }
     },
     "extra": {

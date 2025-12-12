@@ -1,0 +1,16 @@
+uuid: e066dace-a18d-4f9d-bb71-193b4546a2bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - node.type.page
+id: node.page.search_index
+targetEntityType: node
+bundle: page
+mode: search_index
+content: {  }
+hidden:
+  langcode: true
+  links: true
+  search_api_excerpt: true

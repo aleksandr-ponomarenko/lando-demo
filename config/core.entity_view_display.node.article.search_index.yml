@@ -1,0 +1,22 @@
+uuid: c21423a7-482b-4f01-ba9b-f700597ebaf5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - node.type.article
+id: node.article.search_index
+targetEntityType: node
+bundle: article
+mode: search_index
+content: {  }
+hidden:
+  body: true
+  comment: true
+  field_image: true
+  field_tags: true
+  field_title_elastic: true
+  field_title_solr: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

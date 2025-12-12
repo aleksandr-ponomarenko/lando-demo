@@ -1,5 +1,5 @@
 name: lando-demo
-recipe: drupal10
+recipe: drupal11
 excludes:
   - .
 config:
@@ -104,7 +104,7 @@ services:
 
   # # elasticsearch
   elasticsearch:
-    type: elasticsearch:7
+    type: elasticsearch:8
     ssl: false
     portforward: false
     scanner: false

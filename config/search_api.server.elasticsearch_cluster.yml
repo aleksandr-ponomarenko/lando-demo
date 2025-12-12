@@ -1,0 +1,21 @@
+uuid: f44e6d47-9868-494e-9a96-26d2a35d6a37
+langcode: en
+status: true
+dependencies:
+  module:
+    - elasticsearch_connector
+id: elasticsearch_cluster
+name: 'Elasticsearch cluster'
+description: ''
+backend: elasticsearch
+backend_config:
+  connector: standard
+  connector_config:
+    url: 'http://elasticsearch:9200'
+    enable_debug_logging: false
+  advanced:
+    fuzziness: auto
+    prefix: ''
+    suffix: ''
+    synonyms:
+      - ''

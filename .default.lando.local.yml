@@ -1,3 +1,5 @@
+excludes:
+  - .
 services:
   # appserver
   appserver:

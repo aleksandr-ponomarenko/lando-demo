@@ -1,7 +1,5 @@
 name: lando-demo
 recipe: drupal11
-excludes:
-  - .
 config:
   webroot: web
   php: '8.3'

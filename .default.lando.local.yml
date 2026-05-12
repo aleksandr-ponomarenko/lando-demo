@@ -1,3 +1,6 @@
+name: lando-demo-debug
+excludes:
+  - .
 services:
   # appserver
   appserver:
@@ -7,10 +10,21 @@ services:
 #         # For NFS
 #         - "${LANDO_VOLUME}:/app"
   # phpmyadmin
-  phpmyadmin:
-    type: phpmyadmin
-    overrides:
-      image: arm64v8/phpmyadmin
+  # phpmyadmin:
+  #   type: phpmyadmin
+  #   overrides:
+  #     image: arm64v8/phpmyadmin
 #  # For NFS
 # compose:
 #   - compose.yml
+proxy:
+  appserver:
+    - lando-demo-debug.lndo.site
+  varnish:
+    - varnish.lando-demo-debug.lndo.site
+  phpmyadmin:
+    - pma.lando-demo-debug.lndo.site
+  solr:
+    - solr.lando-demo-debug.lndo.site:8983
+  elasticsearch:
+    - elasticsearch.lando-demo-debug.lndo.site:9200
